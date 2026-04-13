@@ -1,10 +1,9 @@
 package kbo_report.repository;
 
-import kbo_report.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import kbo_report.entity.User; // 이 줄이 빠져있어서 User를 못 찾는 거예요!
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    // 아이디로 사용자 찾기
     Optional<User> findByUsername(String username);
 }
