@@ -1,8 +1,9 @@
 package kbo_report.controller;
 
-import kbo_report.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import kbo_report.service.UserService;
 
 @RestController
 @RequestMapping("/api")
