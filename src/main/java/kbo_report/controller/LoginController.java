@@ -25,22 +25,24 @@ public class LoginController {
 
     // 회원가입 처리 (수정된 버전)
     @PostMapping("/signup")
-    public String signup(@RequestParam String username, 
-                         @RequestParam String password, 
-                         @RequestParam String name) {
-        try {
-            // 1. 새로운 User 엔티티 객체 생성
-            kbo_report.entity.User user = new kbo_report.entity.User();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setName(name);
+public String signup(@RequestParam String username, 
+                     @RequestParam String password, 
+                     @RequestParam String name,
+                     @RequestParam String email,          // 추가
+                     @RequestParam String favoriteTeam) { // 추가
+    try {
+        kbo_report.entity.User user = new kbo_report.entity.User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setName(name);
+        user.setEmail(email);          // 추가
+        user.setFavoriteTeam(favoriteTeam); // 추가
 
-            // 2. 서비스의 register 메서드 호출
-            userService.register(user);
-            
-            return "회원가입 성공! 이제 로그인해 주세요.";
-        } catch (Exception e) {
-            return "회원가입 실패: " + e.getMessage();
-        }
+        userService.register(user);
+        
+        return "회원가입 성공! 이제 로그인해 주세요.";
+    } catch (Exception e) {
+        return "회원가입 실패: " + e.getMessage();
     }
+}
 }
