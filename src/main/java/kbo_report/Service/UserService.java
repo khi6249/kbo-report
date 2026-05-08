@@ -1,4 +1,4 @@
-package kbo_report.service; // 현재 폴더 구조가 repository 안에 service가 있으므로 이렇게 써야 합니다.
+package kbo_report.service;
 
 import kbo_report.entity.User;
 import kbo_report.repository.UserRepository;
@@ -13,7 +13,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // 회원가입 기능
+    // 회원가입 기능 (그대로 유지)
     public void register(User user) {
         String rawPassword = user.getPassword();
         String encryptedPassword = PasswordUtil.encrypt(rawPassword);
@@ -23,15 +23,18 @@ public class UserService {
         System.out.println("DB 저장 완료: " + encryptedPassword);
     }
 
-    // 로그인 검증 기능
-    public boolean login(String username, String password) {
+    // 로그인 검증 기능 (boolean -> User 반환으로 변경)
+    public User login(String username, String password) {
         Optional<User> userOpt = userRepository.findByUsername(username);
         
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             String encryptedInput = PasswordUtil.encrypt(password);
-            return user.getPassword().equals(encryptedInput);
+            
+            if (user.getPassword().equals(encryptedInput)) {
+                return user; // 성공 시 User 정보 전체를 돌려줍니다!
+            }
         }
-        return false;
+        return null; // 실패 시 빈 값(null)을 돌려줍니다.
     }
 }
