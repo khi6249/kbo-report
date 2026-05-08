@@ -44,5 +44,5 @@ public String signup(@RequestParam String username,
     } catch (Exception e) {
         return "회원가입 실패: " + e.getMessage();
     }
-}
+    }
 }
