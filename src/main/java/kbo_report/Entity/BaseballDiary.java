@@ -17,10 +17,14 @@ public class BaseballDiary {
     @Column(columnDefinition = "TEXT")
     private String content;       // 일기 내용 (경기 결과, 직관 후기 등)
 
+    private String emoji; // 🌟 [추가] 이모지 저장용 필드 (예: "🔥", "⚾", "😢")
+
     // 기본 생성자
     public BaseballDiary() {}
 
     // Getter, Setter
+    public String getEmoji() { return emoji; }
+    public void setEmoji(String emoji) { this.emoji = emoji; }
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getUsername() { return username; }
